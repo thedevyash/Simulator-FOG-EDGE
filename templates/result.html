@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation Results</title>
+    <style>
+        .meter-container {
+            margin: 20px 0;
+        }
+        .meter {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+        .meter-label {
+            font-size: 1em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Simulation Results</h1>
+    <img src="data:image/png;base64,{{ graph_url }}" alt="Simulation Graph">
+    <br>
+    {% if show_details %}
+        <h2>Additional Details</h2>
+        <div class="meter-container">
+            <div class="meter-label">Application Meter:</div>
+            <div class="meter">{{ details['application_meter'] }}</div>
+        </div>
+        <div class="meter-container">
+            <div class="meter-label">Cloud and Fog Meter:</div>
+            <div class="meter">{{ details['cloud_and_fog_meter'] }}</div>
+        </div>
+        <div class="meter-container">
+            <div class="meter-label">Infrastructure Meter:</div>
+            <div class="meter">{{ details['infrastructure_meter'] }}</div>
+        </div>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Run another simulation</a>
+</body>
+</html>

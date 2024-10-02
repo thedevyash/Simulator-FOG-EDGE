@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fog Edge Network Simulation</title>
+</head>
+<body>
+    <h1>Fog Edge Network Simulation</h1>
+    <form action="{{ url_for('simulate') }}" method="post">
+        <input type="hidden" name="sensor_count" value="{{ sensor_count }}">
+        <input type="hidden" name="fog_count" value="{{ fog_count }}">
+        <input type="hidden" name="edge_count" value="{{ edge_count }}">
+
+        <h2>Sensor Nodes</h2>
+        {% for i in range(sensor_count) %}
+            <h3>Sensor {{ i + 1 }}</h3>
+            <label for="sensor_cu_{{ i }}">Compute Units:</label>
+            <input type="number" step="0.1" id="sensor_cu_{{ i }}" name="sensor_cu_{{ i }}" required>
+            <br>
+            <label for="sensor_max_power_{{ i }}">Max Power (W):</label>
+            <input type="number" step="0.1" id="sensor_max_power_{{ i }}" name="sensor_max_power_{{ i }}" required>
+            <br>
+            <label for="sensor_static_power_{{ i }}">Static Power (W):</label>
+            <input type="number" step="0.1" id="sensor_static_power_{{ i }}" name="sensor_static_power_{{ i }}" required>
+            <br>
+        {% endfor %}
+
+        <h2>Fog Nodes</h2>
+        {% for i in range(fog_count) %}
+            <h3>Fog Node {{ i + 1 }}</h3>
+            <label for="fog_cu_{{ i }}">Compute Units:</label>
+            <input type="number" step="0.1" id="fog_cu_{{ i }}" name="fog_cu_{{ i }}" required>
+            <br>
+            <label for="fog_max_power_{{ i }}">Max Power (W):</label>
+            <input type="number" step="0.1" id="fog_max_power_{{ i }}" name="fog_max_power_{{ i }}" required>
+            <br>
+            <label for="fog_static_power_{{ i }}">Static Power (W):</label>
+            <input type="number" step="0.1" id="fog_static_power_{{ i }}" name="fog_static_power_{{ i }}" required>
+            <br>
+        {% endfor %}
+
+        <h2>Edges</h2>
+        {% for i in range(edge_count) %}
+            <h3>Edge {{ i + 1 }}</h3>
+            <label for="edge_latency_{{ i }}">Latency (ms):</label>
+            <input type="number" step="0.1" id="edge_latency_{{ i }}" name="edge_latency_{{ i }}" required>
+            <br>
+            <label for="edge_bandwidth_{{ i }}">Bandwidth (bps):</label>
+            <input type="number" step="0.1" id="edge_bandwidth_{{ i }}" name="edge_bandwidth_{{ i }}" required>
+            <br>
+            <label for="edge_power_per_bit_{{ i }}">Power per Bit (J/bit):</label>
+            <input type="number" step="0.1" id="edge_power_per_bit_{{ i }}" name="edge_power_per_bit_{{ i }}" required>
+            <br>
+        {% endfor %}
+
+        <h2>Cloud Node</h2>
+        <label for="cloud_power_per_cu">Power per CU (W):</label>
+        <input type="number" step="0.1" id="cloud_power_per_cu" name="cloud_power_per_cu" required>
+        <br>
+        <label for="show_details">Show Additional Details:</label>
+        <input type="checkbox" id="show_details" name="show_details">
+        <br>
+        <button type="submit">Simulate</button>
+    </form>
+</body>
+</html>

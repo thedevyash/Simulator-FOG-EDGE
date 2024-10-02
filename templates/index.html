@@ -3,85 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Power Consumption Simulation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        button {
-            padding: 10px 15px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .output {
-            margin-top: 20px;
-        }
-        .output img {
-            max-width: 100%;
-        }
-    </style>
+    <title>Fog Edge Network Simulation</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Power Consumption Simulation</h1>
-        <form id="simulationForm">
-            <div class="form-group">
-                <label for="node_cu">Node CU:</label>
-                <input type="number" id="node_cu" name="node_cu" required>
-            </div>
-            <div class="form-group">
-                <label for="max_power">Max Power:</label>
-                <input type="number" id="max_power" name="max_power" required>
-            </div>
-            <div class="form-group">
-                <label for="static_power">Static Power:</label>
-                <input type="number" id="static_power" name="static_power" required>
-            </div>
-            <div class="form-group">
-                <label for="task_cu">Task CU:</label>
-                <input type="number" id="task_cu" name="task_cu" required>
-            </div>
-            <button type="submit">Simulate</button>
-        </form>
-        <div class="output" id="output"></div>
-    </div>
-    <script>
-        document.getElementById('simulationForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            fetch('/simulate', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                const outputDiv = document.getElementById('output');
-                outputDiv.innerHTML = `<img src="data:image/png;base64,${data.plot_url}" alt="Power Consumption Graph">`;
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
+    <h1>Fog Edge Network Simulation</h1>
+    <form action="{{ url_for('step2') }}" method="post">
+        <label for="sensor_count">Number of Sensors:</label>
+        <input type="number" id="sensor_count" name="sensor_count" required>
+        <br>
+        <label for="fog_count">Number of Fog Nodes:</label>
+        <input type="number" id="fog_count" name="fog_count" required>
+        <br>
+        <label for="edge_count">Number of Edges:</label>
+        <input type="number" id="edge_count" name="edge_count" required>
+        <br>
+        <button type="submit">Next</button>
+    </form>
 </body>
 </html>
